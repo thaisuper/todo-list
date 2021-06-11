@@ -1,0 +1,24 @@
+.item {
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
+  border-top: 1px solid #000;
+}
+
+.item:last-child {  
+  border-bottom: 1px solid #000;
+}
+
+.header {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap-check {
+  display: flex;
+}
+
+.wrap-from {
+  padding: 8px;
+  border-top: 1px solid #000;
+}

@@ -1,0 +1,28 @@
+.wrap-input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap-label {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap-label > span {
+  width: 45%;
+}
+
+.wrap-error {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrap-label > span {
+  width: 45%;
+}
+
+.error {
+  color: red;
+}
