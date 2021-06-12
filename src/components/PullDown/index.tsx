@@ -1,18 +1,11 @@
-import { FC, useState } from "react";
-
-export interface IOptions {
-  value: number,
-  label: string,
-}
-
-interface PullDownProps {
-  options: IOptions[],
-  onChange: (value: number) => void,
-  initValue?: number
-}
+import { FC, useEffect, useState } from "react";
 
 const PullDown: FC<PullDownProps> = ({options, onChange, initValue}) => {
-  const [value, setValue] = useState(initValue ?? "");
+  const [value, setValue] = useState(initValue);
+
+  useEffect(() => {
+    setValue(initValue);
+  }, [initValue]);
 
   const handleChange = (evt: any) => {
     setValue(evt.target.value);

@@ -9,3 +9,7 @@ export const PRIORITY_VALUES = {
   NORMAL: 2,
   HIGHT: 3,
 }
+
+export const FORMAT_DATE = "yyyy-MM-DD";
+
+export const LOCAL_KEY = "todoListKey";

@@ -1,15 +1,10 @@
-import TaskForm, { ITask } from "components/TaskForm";
-import { saveTask } from "utils";
+/// <reference path="../../interface.d.ts"/>
+
+import TaskForm from "components/TaskForm";
+import { saveTask } from "helper/todoHelper";
 import { FC, useState } from "react";
 
-interface TaskItemProps {
-  task: ITask,
-  onCheck: (id: string, value: boolean) => void,
-  onUpdated?: () => void,
-  onDelete?: (id: string) => void,
-}
-
-const TaskItem: FC<TaskItemProps> = ({ task, onCheck, onUpdated, onDelete }) => {
+const TaskItem: FC<TaskItemProps> = ({ task, onCheck, onDelete }) => {
 
   const [showDetail, setShowDetail] = useState(false);
 
@@ -19,9 +14,6 @@ const TaskItem: FC<TaskItemProps> = ({ task, onCheck, onUpdated, onDelete }) => 
 
   const handleUpdate = (task: ITask) => {
     saveTask(task);
-    if (onUpdated) {
-      onUpdated()
-    };
   }
 
   const handleDelete = () => {

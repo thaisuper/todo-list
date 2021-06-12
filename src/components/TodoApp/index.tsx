@@ -1,23 +1,20 @@
-import { FC, useEffect, useState } from "react";
-import TaskForm, { ITask } from "components/TaskForm";
-import { getTodoList, saveTask, saveTasks } from "utils";
+/// <reference path="../../interface.d.ts"/>
+
+import { FC, useState } from "react";
+import TaskForm from "components/TaskForm";
+import { getTodoList, saveTask, saveTasks } from "helper/todoHelper";
 import TaskList from "components/TaskList";
 
-const TodoList: FC = () => {
+const TodoApp: FC = () => {
   const [search, setSearch] = useState("");
   const [tasks, setTasks] = useState(getTodoList());
   const [checks, setChecks] = useState<string[]>([]);
-
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
 
   const loadTasks = () => {
     setTasks(getTodoList());
   }
 
   const handleAdd = (data: ITask) => {
-    // setValue1(saveTask(data));
     saveTask(data);
     loadTasks();
   }
@@ -28,6 +25,7 @@ const TodoList: FC = () => {
 
   const onBulkRemove = () => {
     saveTasks(tasks.filter(todo => !checks.includes(todo.id)));
+    setChecks([]);
     loadTasks();
   }
 
@@ -47,6 +45,14 @@ const TodoList: FC = () => {
     setSearch(evt.target.value);
   }
 
+  const handleCheck = (id: string, value: boolean) => {
+    if (!value) {
+      setChecks(checks.filter(c => c !== id));
+    } else {
+      setChecks([...checks, id]);
+    }
+  }
+
   return (
     <div className="container">
       <div className="wrap left">
@@ -56,7 +62,7 @@ const TodoList: FC = () => {
       <div className="wrap right">
         <p className="title">To Do List</p>
         <input className="text-input mb-10" placeholder="Search ..." onChange={handleSearch} />
-        <TaskList taskList={tasks.filter(t => matchSearch(t))} onTaskChecks={(ids => setChecks(ids))} onDelete={hadleDelete} />
+        <TaskList taskList={tasks.filter(t => matchSearch(t))} onDelete={hadleDelete} handleCheck={handleCheck} />
         {checks.length > 0 &&
           <div className="bulk">
             <span>Bulk Action:</span>
@@ -70,4 +76,4 @@ const TodoList: FC = () => {
   )
 }
 
-export default TodoList;
+export default TodoApp;
